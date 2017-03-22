@@ -1,0 +1,11 @@
+- alias: "UPS Battery Watchdog"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ups_battery
+    below: 95
+  action:
+    service: notify.pushbullet
+    data:
+      title: "Jarvis"
+      target: "device/phone"
+      message: "Warning! UPS is running on battery power!"

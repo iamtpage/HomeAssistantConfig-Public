@@ -1,0 +1,6 @@
+weblink.router:
+  icon: mdi:router-wireless
+weblink.odin_unraid:
+  icon: mdi:server-network
+weblink.pi_hole_admin_page:
+  icon: mdi:link

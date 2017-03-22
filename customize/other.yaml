@@ -1,0 +1,6 @@
+backup.lastrun:
+  friendly_name: "Last Backup"
+  icon: mdi:backup-restore
+
+wifi.state:
+  friendly_name: "Wifi State"

@@ -1,0 +1,12 @@
+- alias: "Button Push"
+  trigger:
+    platform: state
+    entity_id: 
+      - button.button1
+      - button.button2
+  action:
+    service: notify.pushbullet
+    data_template:
+      title: "Jarvis"
+      target: "device/phone"
+      message: " {{ trigger.to_state.attributes.friendly_name }} was pushed!"

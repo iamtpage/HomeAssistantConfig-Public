@@ -1,0 +1,7 @@
+ - platform: google_travel_time
+   api_key: !secret google_api_key
+   name: "Work Commute"
+   origin: zone.home
+   destination: zone.work
+   options:
+     arrival_time: 08:00:00

@@ -1,0 +1,10 @@
+- alias: "HASS Startup Watchdog"
+  trigger:
+    platform: event
+    event_type: homeassistant_start
+  action:
+    service: notify.pushbullet
+    data:
+      target: "device/phone"
+      title: "Jarvis"
+      message: "Home Assistant is up"

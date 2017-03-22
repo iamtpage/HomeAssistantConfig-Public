@@ -1,0 +1,71 @@
+sensor.fastcom_download:
+  friendly_name: "Download Speed"
+
+sensor.ipv4_address_eth0:
+  friendly_name: "IP Address"
+sensor.ipv4_address_wlan0:
+  friendly_name: "IP Address"
+sensor.received_eth0:
+  friendly_name: "Data Received"
+sensor.received_wlan0:
+  friendly_name: "Data Received"
+sensor.sent_eth0:
+  friendly_name: "Data Sent"
+sensor.sent_wlan0:
+  friendly_name: "Data Sent"
+
+sensor.steam_game:
+  icon: mdi:gamepad-variant
+
+sensor.pihole:
+  friendly_name: "Number of Ads Blocked Today"
+  icon: mdi:raspberrypi
+sensor.pihole_domains:
+  icon: mdi:alert-outline
+sensor.pihole_queries:
+  icon: mdi:sitemap
+
+sensor.broadlink_sensor_temperature:
+  friendly_name: "Temperature inside"
+
+sensor.dark_sky_minutely_summary:
+  friendly_name: 'Weather Summary'
+sensor.dark_sky_nearest_storm_distance:
+  friendly_name: 'Nearest Storm'
+sensor.dark_sky_temperature:
+  friendly_name: 'Temperature'
+sensor.dark_sky_precip_probability:
+  friendly_name: 'Rain Chance'
+sensor.dark_sky_daily_high_temperature:
+  friendly_name: 'High'
+sensor.dark_sky_daily_low_temperature:
+  friendly_name: 'Low'
+sensor.dark_sky_precip_intensity:
+  friendly_name: "Precipitation Intensity"
+
+sensor.steam_76561198019873207:
+  friendly_name: "Dexter"
+
+sensor.btc_wallet:
+  icon: mdi:currency-usd
+sensor.coinbase_btc_buy_price:
+  icon: mdi:currency-btc
+sensor.coinbase_btc_sell_price:
+  icon: mdi:currency-btc
+
+sensor.eth_wallet:
+  icon: mdi:currency-usd
+
+sensor.vpn_ip:
+  icon: mdi:server-network
+sensor.website_ip:
+  icon: mdi:server-network
+
+sensor.ram_use:
+  friendly_name: 'RAM Usage'
+sensor.cpu_use:
+  friendly_name: 'CPU Usage'
+
+sensor.plex_now_playing:
+  friendly_name: 'Now Playing on Plex'
+  hidden: true

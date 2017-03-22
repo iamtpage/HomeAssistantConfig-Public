@@ -1,0 +1,7 @@
+bedroom_lights_on:
+  alias: "Turn Bedroom Lights ON"
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: group.bedroom
+        brightness: 254

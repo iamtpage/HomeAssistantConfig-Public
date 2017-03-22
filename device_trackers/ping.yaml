@@ -1,0 +1,22 @@
+ - platform: ping
+   track_new_devices: true
+   interval_seconds: 25
+   consider_home: 180
+   hosts:
+     website: www.tpage.io
+     vpn: vpn.tpage.io
+     alexa: 1.1.1.1
+     desktop: 1.1.1.1
+     google_home: 1.1.1.1
+#     huehub: 1.1.1.1
+     ir2ip: 1.1.1.1
+     laptop: 1.1.1.1
+     odin: 1.1.1.1
+     odin2: 1.1.1.1
+     gf_iphone: 1.1.1.1
+     gf_laptop: 1.1.1.1
+     phone: 1.1.1.1
+     roku_stick: 1.1.1.1
+     router: 1.1.1.1
+     tv: 1.1.1.1
+     watch_wifi: 1.1.1.1

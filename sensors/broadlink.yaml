@@ -1,0 +1,8 @@
+# Uncomment when home
+# - platform: broadlink
+#   update_interval: 60
+#   host: !secret broadlink_ip
+#   mac: !secret broadlink_mac
+#   timeout: 10
+#   monitored_conditions:
+#     - temperature

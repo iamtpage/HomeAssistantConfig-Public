@@ -1,0 +1,76 @@
+########################################################
+Create template sensors for device_tracker (changes home/not_home to online/offline)
+
+- platform: template
+  sensors:
+{% for state in states.device_tracker -%}
+  {% if loop.first %}{% elif loop.last %}
+{% else %}
+{% endif %}    {{state.entity_id|replace("device_tracker.","") -}}_template:
+      value_template: {{ '"{% if is_state' }}('{{-state.entity_id -}}', 'home') {{'%}online{% else %}offline{% endif %}"'}}
+      friendly_name: "{{ state.attributes.friendly_name|replace("_"," ",) if state.attributes.friendly_name is defined else state.name|replace("_"," ",)}}"
+      icon_template: {{ '"{% if is_state' }}('{{-state.entity_id -}}', 'home') {{'%}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"'}}
+{% endfor %}
+
+#########################################################
+Create fast Customize for groups, sensors, covers etc...  Just change that first line below 'sensor' to 'group', 'covers' etc..
+
+{% for state in states.sensor -%}
+  {% if loop.first %}
+{% elif loop.last %}
+{% else %}
+{% endif %}
+{{- state.entity_id }}:
+  friendly_name: '{{ state.attributes.friendly_name|replace("_"," ",)|title() if state.attributes.friendly_name is defined else state.name|replace("_"," ",)|title() }}'
+  emulated_hue: {{state.attributes.emulated_hue if state.attributes.emulated_hue is defined else 'False' }}
+  hidden: {{state.attributes.hidden if state.attributes.hidden is defined else "False"}}
+  {{'icon: '+ state.attributes.icon if state.attributes.icon is defined}}
+  {{'homebridge_cover_type: '+ state.attributes.homebridge_cover_type if state.attributes.homebridge_cover_type is defined}}
+  {{'assumed_state: '+ state.attributes.assumed_state if state.attributes.assumed_state is defined}}
+{% endfor -%}
+
+#########################################################
+Prints entities in all defined groups
+
+{% for group in states.group%}
+{% for entity in group.attributes.entity_id|list() %}
+{{-entity}}
+{% endfor %}
+{% endfor %}
+
+#########################################################
+Prints entities by domain
+
+{% set domains = [
+states.automation,
+states.calendar,
+states.camera,
+states.device_tracker,
+states.media_player,
+states.sensor,
+states.switch,
+] 
+%}
+
+{% for domain in domains %}
+{% for state in domain %}
+{{state.entity_id-}}
+{%endfor-%}
+{%endfor-%}
+
+#########################################################
+Time calculation when to leave for work
+
+Work Time: {{states.calendar.calendar.attributes.start_time}}
+Commute Time: {{states.sensor.work_commute.state}}
+
+Leave Time: {{ (as_timestamp(states.calendar.calendar.attributes.start_time) -000-states.sensor.work_commute.state|float *60)|timestamp_custom('%') | timestamp_local }}
+
+Is it time to leave? {% if as_timestamp(now()) == ((as_timestamp(states.calendar.calendar.attributes.start_time) -000-states.sensor.work_commute.state|float *60)|timestamp_custom('%')) %}true{% else %}false{% endif %}
+
+Now: {{as_timestamp(now())}}
+Leave time: {{(as_timestamp(states.calendar.calendar.attributes.start_time) -000-states.sensor.work_commute.state|float *60)|timestamp_custom('%')}}
+
+
+Is it time to leave (test)? {% if as_timestamp('2017-03-22 07:42:00') == ((as_timestamp(states.calendar.calendar.attributes.start_time) -000-states.sensor.work_commute.state|float *60)|timestamp_custom('%')) %}true{% else %}false{% endif %}
+#########################################################

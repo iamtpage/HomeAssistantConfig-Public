@@ -1,0 +1,3 @@
+alarm_clock_status:
+  initial: on
+  name: Alarm Clock Toggle

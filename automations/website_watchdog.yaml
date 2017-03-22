@@ -1,0 +1,12 @@
+- alias: "Website Watchdog"
+  trigger:
+    platform: state
+    entity_id: device_tracker.vpn, device_tracker.website
+    from: "on"
+    to: "off"
+  action:
+    service: notify.pushbullet
+    data:
+      title: "Jarvis"
+      message: " {{ trigger.to_state.attributes.friendly_name }} is unreachable"
+      target: "device/phone"

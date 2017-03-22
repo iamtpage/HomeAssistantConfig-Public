@@ -1,0 +1,155 @@
+alexa:
+  hide_if_away: false
+  mac: AA:AA:AA:AA:AA:AA
+  name: Alexa
+  picture:
+  track: true
+  vendor: Amazon Technologies Inc.
+
+alexa_bt:
+  hide_if_away: false
+  mac: BT_AA:AA:AA:AA:AA:AA
+  name: Alexa (BT)
+  picture:
+  track: true
+  vendor: Amazon Technologies Inc.
+
+desktop:
+  name: Desktop Computer
+  mac: AA:AA:AA:AA:AA:AA
+  picture:
+  track: yes
+  hide_if_away: no
+
+google_home:
+  hide_if_away: false
+  mac: AA:AA:AA:AA:AA:AA
+  name: Google Home
+  picture:
+  track: true
+  vendor: Google, Inc.
+
+huehub:
+  name: Hue Hub
+  mac: AA:AA:AA:AA:AA:AA
+  picture:
+  track: yes
+  hide_if_away: no
+
+ir2ip:
+  name: Broadlink RM2 Pro
+  mac: AA:AA:AA:AA:AA:AA
+  picture: 
+  track: yes
+  hide_if_away: no
+
+laptop:
+  name: Laptop
+  mac: AA:AA:AA:AA:AA:AA
+  picture:
+  track: yes
+  hide_if_away: no
+
+gf_iphone:
+  hide_if_away: false
+  mac: AA:AA:AA:AA:AA:AA
+  name: gf's iPhone
+  picture:
+  track: true
+
+gf_laptop:
+  hide_if_away: false
+  mac: AA:AA:AA:AA:AA:AA
+  name: gf's Laptop
+  picture:
+  track: true
+  
+odin:
+  hide_if_away: false
+  mac: AA:AA:AA:AA:AA:AA
+  name: Odin
+  picture:
+  track: true
+
+odin2:
+  hide_if_away: false
+  mac: AA:AA:AA:AA:AA:AA
+  name: 'Odin (Alt NIC)'
+  picture:
+  track: true
+
+phone:
+  name: Phone (Wifi)
+  mac: AA:AA:AA:AA:AA:AA
+  picture:
+  track: yes
+  hide_if_away: no
+
+phone_bt:
+  name: Phone (Bluetooth)
+  mac: BT_AA:AA:AA:AA:AA:AA
+  picture: 
+  track: yes
+  hide_if_away: no
+
+phone_gps:
+  hide_if_away: false
+  mac:
+  name: Phone (GPS)
+  picture:
+  track: true
+  vendor:
+
+roku_stick:
+  hide_if_away: false
+  mac: AA:AA:AA:AA:AA:AA
+  name: Roku Stick
+  picture:
+  track: true
+  vendor: Roku, Inc.
+
+router:
+  hide_if_away: false
+  mac:
+  name: router
+  picture:
+  track: true
+  vendor:
+
+tv:
+  name: Roku Smart TV
+  mac: AA:AA:AA:AA:AA:AA
+  picture: 
+  track: yes
+  hide_if_away: no
+  
+vpn:
+  hide_if_away: false
+  mac:
+  name: "vpn.tpage.io"
+  picture:
+  track: true
+  vendor: 
+
+watch_bt:
+  name: Moto 360 Watch (BT)
+  mac: BT_AA:AA:AA:AA:AA:AA
+  picture:
+  track: yes
+  hide_if_away: no
+
+website:
+  hide_if_away: false
+  mac:
+  name: "www.tpage.io"
+  picture:
+  track: true
+  vendor:
+
+iphone:
+  hide_if_away: false
+  mac: BT_AA:AA:AA:AA:AA:AA
+  name: iPhone
+  picture:
+  track: true
+  vendor: unknown

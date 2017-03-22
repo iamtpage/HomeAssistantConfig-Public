@@ -1,0 +1,15 @@
+light.bedroom_fan_light:
+  emulated_hue: true
+  emulated_hue_name: "The fan light"
+light.bedroom_lamp_light:
+  emulated_hue: true
+  emulated_hue_name: "The lamp light"
+group.bedroom:
+  emulated_hue: true
+  emulated_hue_name: "The bedroom lights"
+group.bathroom:
+  emulated_hue: true
+  emulated_hue_name: "The bathroom lights"
+group.all_lights:
+  emulated_hue: true
+  emulated_hue_name: "All the lights"

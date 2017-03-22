@@ -1,0 +1,6 @@
+- alias: "Master Toggle"
+  trigger:
+    platform: state
+    entity_id: button.button1
+  action:
+    service: homeassistant.toggle

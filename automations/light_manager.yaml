@@ -1,0 +1,24 @@
+- alias: "Turn Lights Off When Not Home"
+  trigger:
+    platform: state
+    entity_id: group.me
+    from: "home"
+    to: "not_home"
+  action:
+    - delay:
+        minutes: 5
+    - service: light.turn_off
+      data:
+        entity_id: group.bedroom
+
+- alias: "Turn Lights On When Home"
+  trigger:
+    platform: state
+    entity_id: group.me
+    to: "home"
+    from: "not_home"
+  action:
+    service: light.turn_on
+    data:
+      entity_id: group.bedroom
+      brightness: 254

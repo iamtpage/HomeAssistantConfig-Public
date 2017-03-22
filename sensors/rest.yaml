@@ -1,0 +1,39 @@
+ - platform: rest
+   resource: https://api.coinbase.com/v2/prices/BTC-USD/buy
+   name: "Coinbase BTC Buy Price"
+   value_template: "{{ value_json.data.amount }}"
+   unity_of_measurement: USD
+   headers:
+     User-Agent: Home Assistant
+     Content-Type: application/json
+     CB-VERSION: 2017-01-03
+
+ - platform: rest
+   resource: https://api.coinbase.com/v2/prices/BTC-USD/sell
+   name: "Coinbase BTC Sell Price"
+   value_template: "{{ value_json.data.amount }}"
+   unity_of_measurement: USD
+   headers:
+     User-Agent: Home Assistant
+     Content-Type: application/json
+     CB-VERSION: 2017-01-03
+
+ - platform: rest
+   resource: https://api.coinbase.com/v2/prices/ETH-USD/buy
+   name: "Coinbase ETH Buy Price"
+   value_template: "{{ value_json.data.amount }}"
+   unity_of_measurement: USD
+   headers:
+     User-Agent: Home Assistant
+     Content-Type: application/json
+     CB-VERSION: 2017-01-03
+
+ - platform: rest
+   resource: https://api.coinbase.com/v2/prices/ETH-USD/sell
+   name: "Coinbase ETH Sell Price"
+   value_template: "{{ value_json.data.amount }}"
+   unity_of_measurement: USD
+   headers:
+     User-Agent: Home Assistant
+     Content-Type: application/json
+     CB-VERSION: 2017-01-03

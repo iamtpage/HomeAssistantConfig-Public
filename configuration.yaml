@@ -1,0 +1,120 @@
+homeassistant:
+  name: Home
+
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
+  elevation: !secret elevation_home
+
+  unit_system: imperial
+  # Uncomment when home
+  #time_zone: America/Chicago
+  time_zone: America/New_York
+
+  customize: !include_dir_merge_named customize
+
+zone:
+  name: Work
+  latitude: !secret latitude_work
+  longitude: !secret longitude_work
+
+frontend:
+config:
+zeroconf:
+conversation:
+history:
+logbook:
+# Uncomment when home
+#apcupsd:
+
+script: !include_dir_merge_named scripts
+automation: !include_dir_merge_list automations
+group: !include groups.yaml
+sensor: !include_dir_merge_list sensors
+device_tracker: !include_dir_merge_list device_trackers
+switch: !include_dir_merge_list switches
+camera: !include_dir_merge_list cameras
+shell_command: !include shell_commands/shell_commands.yaml
+input_slider: !include input/input_slider.yaml
+input_boolean: !include input/input_boolean.yaml
+
+updater:
+  reporting: no
+
+logger:
+  default: warn
+
+# Uncomment when home
+#emulated_hue:
+#  expose_by_default: false
+
+notify:
+  - platform: pushbullet
+    name: pushbullet
+    api_key: !secret pushbullet_api_key
+
+weblink:
+  entities:
+    - name: "Router"
+      url: http://192.168.1.1
+    - name: "Odin (unRAID)"
+      url: http://odin.vik
+    - name: "Pi-Hole Admin Page"
+      url: http://thor.vik/admin
+
+tts:
+  - platform: amazon_polly
+    aws_access_key_id: !secret aws_access
+    aws_secret_access_key: !secret aws_secret
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 300
+
+media_player:
+  - platform: cast
+    name: "Google Home"
+    host: 1.1.1.1
+# Uncomment when home
+#  - platform: roku
+#    name: "Roku TV"
+#    host: 1.1.1.1
+#  -  platform: plex
+#     name: "Plex Server"
+#     host: !secret odin_host
+
+http:
+  api_password: !secret http_password
+  server_port: 8123
+  server_host: !secret server_host_ip
+  use_x_forwarded_for: True
+  ip_ban_enabled: True
+  login_attempts_threshold: 3
+
+google:
+  client_id: !secret google_client_id
+  client_secret: !secret google_client_secret
+
+# Uncomment when home
+#light:
+#  - platform: hue
+#    host: !secret hue_ip
+#    allow_unreachable: true
+#    name: "Hue Lights"
+#
+#influxdb:
+#  host: !secret odin_host
+#  whitelist:
+#     - sensor.broadlink_sensor_temperature
+#     - sensor.cpu_use
+#     - sensor.dark_sky_daily_high_temperature
+#     - sensor.dary_sky_daily_low_temperature
+#     - sensor.dark_sky_nearest_storm_distance
+#     - sensor.dark_sky_precip_intensity
+#     - sensor.dark_sky_precip_probability
+#     - sensor.dark_sky_temperature
+#     - sensor.pihole
+#     - sensor.pihole_domains_blocked
+#     - sensor.pihole_percentage_today
+#     - sensor.pihole_queries
+#     - sensor.ram_use
+#     - sensor.ups_battery
+#     - sensor.ups_load

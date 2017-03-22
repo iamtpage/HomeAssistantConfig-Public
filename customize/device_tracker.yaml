@@ -1,0 +1,41 @@
+device_tracker.alexa:
+  icon: mdi:amazon-clouddrive
+device_tracker.alexa_bt:
+  icon: mdi:amazon-clouddrive
+device_tracker.desktop:
+  icon: mdi:monitor
+device_tracker.google_home:
+  icon: mdi:google
+device_tracker.huehub:
+  icon: mdi:lightbulb-outline
+device_tracker.ir2ip:
+  icon: mdi:remote
+device_tracker.laptop:
+  icon: mdi:laptop-windows
+device_tracker.gf_iphone:
+  icon: mdi:cellphone-iphone
+device_tracker.gf_laptop:
+  icon: mdi:laptop-mac
+device_tracker.odin:
+  icon: mdi:server-network
+device_tracker.odin2:
+  icon: mdi:server-network
+device_tracker.phone:
+  icon: mdi:cellphone-android
+device_tracker.phone_bt:
+  icon: mdi:bluetooth
+device_tracker.phone_gps:
+  icon: mdi:crosshairs-gps
+device_tracker.roku_stick:
+  icon: mdi:movie
+device_tracker.tv:
+  icon: mdi:television-guide
+device_tracker.vpn:
+  friendly_name: "vpn.tpage.io"
+  icon: mdi:server-network
+device_tracker.watch_bt:
+  icon: mdi:watch
+  hidden: true
+device_tracker.website:
+  friendly_name: "www.tpage.io"
+  icon: mdi:server-network

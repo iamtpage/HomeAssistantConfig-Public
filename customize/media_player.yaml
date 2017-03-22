@@ -1,0 +1,14 @@
+media_player.tclroku_tv__aaaaaaaaaaa:
+  friendly_name: Roku TV
+  hidden: true
+media_player.plex_web_chrome:
+  friendly_name: Plex Chrome Player
+  hidden: true
+media_player.roku_aaaaaaaaaaaaa:
+  friendly_name: Roku Media Control
+  hidden: true
+media_player.media_player:
+  hidden: true
+media_player.roku_tv:
+  hidden: true
+

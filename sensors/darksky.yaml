@@ -1,0 +1,17 @@
+ - platform: darksky
+   api_key: !secret darksky_api
+   update_interval: "00:02:00"
+   monitored_conditions:
+      - summary
+      - icon
+      - nearest_storm_distance
+      - precip_type
+      - precip_probability
+      - precip_intensity
+      - apparent_temperature
+      - temperature
+      - minutely_summary
+      - hourly_summary
+      - daily_summary
+      - temperature_max
+      - temperature_min

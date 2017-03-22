@@ -1,0 +1,28 @@
+ - alias: "Dataplicity Watchdog"
+   initial_state: 'off'
+   trigger:
+     platform: time
+     minutes: '/2'
+     seconds: 00
+   condition:
+     condition: or
+     conditions:
+       - condition: state
+         entity_id: sensor.dataplicity
+         state: 'off'
+       - condition: state
+         entity_id: sysctl.supervisor_service
+         state: 'failed'
+   action:
+     - service: notify.pushbullet
+       data:
+         title: "Jarvis"
+         target: "device/phone"
+         message: "Dataplicity tunnel is broken"
+     - service: shell_command.restart_dataplicity
+     - service: automation.turn_off
+       entity_id: automation.dataplicity_watchdog
+     - delay:
+         minutes: 1
+     - service: automation.turn_on
+       entity_id: automation.dataplicity_watchdog

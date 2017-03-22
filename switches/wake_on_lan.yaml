@@ -1,0 +1,4 @@
+ - platform: wake_on_lan
+   mac_address: !secret desktop_mac
+   name: "Desktop WOL"
+   host: 1.1.1.1

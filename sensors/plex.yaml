@@ -1,0 +1,6 @@
+# - platform: plex
+#   name: "Plex: Now Playing"
+#   host: !secret odin_host
+#   port: 32400
+#   username: !plex_user
+#   password: !plex_password

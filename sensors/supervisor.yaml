@@ -1,0 +1,2 @@
+ - platform: supervisord
+   url: http://supervisord.thor.vik

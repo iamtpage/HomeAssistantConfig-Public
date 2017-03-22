@@ -1,0 +1,91 @@
+- platform: template
+  sensors:
+    alexa_template:
+      value_template: "{% if is_state('device_tracker.alexa', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Alexa"
+      icon_template: "{% if is_state('device_tracker.alexa', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    alexa_bt_template:
+      value_template: "{% if is_state('device_tracker.alexa_bt', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Alexa (BT)"
+      icon_template: "{% if is_state('device_tracker.alexa_bt', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    desktop_template:
+      value_template: "{% if is_state('device_tracker.desktop', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Desktop Computer"
+      icon_template: "{% if is_state('device_tracker.desktop', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    google_home_template:
+      value_template: "{% if is_state('device_tracker.google_home', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Google Home"
+      icon_template: "{% if is_state('device_tracker.google_home', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    huehub_template:
+      value_template: "{% if is_state('device_tracker.huehub', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Hue Hub"
+      icon_template: "{% if is_state('device_tracker.huehub', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    ir2ip_template:
+      value_template: "{% if is_state('device_tracker.ir2ip', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Broadlink RM2 Pro"
+      icon_template: "{% if is_state('device_tracker.ir2ip', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    laptop_template:
+      value_template: "{% if is_state('device_tracker.laptop', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Laptop"
+      icon_template: "{% if is_state('device_tracker.laptop', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    lauren_iphone_template:
+      value_template: "{% if is_state('device_tracker.lauren_iphone', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Lauren's iPhone"
+      icon_template: "{% if is_state('device_tracker.lauren_iphone', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    lauren_laptop_template:
+      value_template: "{% if is_state('device_tracker.lauren_laptop', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Lauren's Laptop"
+      icon_template: "{% if is_state('device_tracker.lauren_laptop', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    odin_template:
+      value_template: "{% if is_state('device_tracker.odin', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Odin"
+      icon_template: "{% if is_state('device_tracker.odin', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    odin2_template:
+      value_template: "{% if is_state('device_tracker.odin2', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Odin (Alt NIC)"
+      icon_template: "{% if is_state('device_tracker.odin2', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    phone_template:
+      value_template: "{% if is_state('device_tracker.phone', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Phone (Wifi)"
+      icon_template: "{% if is_state('device_tracker.phone', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    phone_bt_template:
+      value_template: "{% if is_state('device_tracker.phone_bt', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Phone (Bluetooth)"
+      icon_template: "{% if is_state('device_tracker.phone_bt', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    roku_stick_template:
+      value_template: "{% if is_state('device_tracker.roku_stick', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Roku Stick"
+      icon_template: "{% if is_state('device_tracker.roku_stick', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    tv_template:
+      value_template: "{% if is_state('device_tracker.tv', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Roku Smart TV"
+      icon_template: "{% if is_state('device_tracker.tv', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    vpn_template:
+      value_template: "{% if is_state('device_tracker.vpn', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "vpn.tpage.io"
+      icon_template: "{% if is_state('device_tracker.vpn', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    watch_bt_template:
+      value_template: "{% if is_state('device_tracker.watch_bt', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Moto 360 Watch (BT)"
+      icon_template: "{% if is_state('device_tracker.watch_bt', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    website_template:
+      value_template: "{% if is_state('device_tracker.website', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "www.tpage.io"
+      icon_template: "{% if is_state('device_tracker.website', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"

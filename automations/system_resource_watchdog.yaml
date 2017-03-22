@@ -1,0 +1,17 @@
+- alias: "System Resource Watchdog"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.cpu_use
+      above: 80
+    - platform: numeric_state
+      entity_id: sensor.ram_use
+      above: 80
+    - platform: numeric_state
+      entity_id: sensor.disk_use_percent
+      above: 80
+  action:
+    - service: notify.pushbullet
+      data_template:
+        title: "Jarvis"
+        message: "Warning! {{trigger.to_state.attributes.friendly_name}} is {{ trigger.to_state.state }}"
+        target: "device/phone"

@@ -1,0 +1,6 @@
+
+- cal_id: asdad@gmail.com
+  entities:
+  - device_id: calendar
+    name: Calendar
+    track: true

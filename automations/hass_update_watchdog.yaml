@@ -1,0 +1,10 @@
+- alias: "HASS Update Watchdog"
+  trigger:
+    platform: state
+    entity_id: updater.updater
+  action:
+    service: notify.pushbullet
+    data_template:
+      target: "device/phone"
+      title: "Jarvis"
+      message: "Home Assistant {{ states('updater.updater') }} is available." 

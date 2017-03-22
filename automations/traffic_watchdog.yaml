@@ -1,0 +1,25 @@
+- alias: "Traffic Watchdog"
+  trigger:
+    platform: template
+    value_template: "{% if as_timestamp(now()) == ((as_timestamp(states.calendar.calendar.attributes.start_time) -000-states.sensor.work_commute.state|float *60)|timestamp_custom('%')) %}true{% else %}false{% endif %}"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: device_tracker.phone_bt
+        state: 'home'
+      - condition: time
+        before: '08:00:00'
+        after: '07:00:00'
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+  action:
+    service: notify.pushbullet
+    data:
+      title: 'Jarvis'
+      target: 'device/phone'
+      message: "You are going to be late for work!"

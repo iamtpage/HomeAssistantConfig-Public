@@ -1,0 +1,16 @@
+  - platform: generic
+    name: "My Location"
+    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.phone_gps.attributes.latitude }},{{ states.device_tracker.phone_gps.attributes.longitude }}&zoom=13&size=720x720&maptype=roadmap&markers=color:blue%7Clabel:P%7C{{ states.device_tracker.phone_gps.attributes.latitude }},{{ states.device_tracker.phone_gps.attributes.longitude }}
+    limit_refetch_to_url_change: True
+
+  - platform: generic
+    name: "US Weather"
+    still_image_url: https://icons.wxug.com/data/weather-maps/radar/united-states/united-states-current-radar-animation.gif
+
+  - platform: generic
+    name: "aaaa Weather"
+    still_image_url: https://icons.wxug.com/data/weather-maps/radar/united-states/lawton-oklahoma-region-current-radar-animation.gif
+
+  - platform: generic
+    name: "aaaa Weather"
+    still_image_url: https://icons.wxug.com/data/weather-maps/radar/united-states/charlotte-north-carolina-region-current-radar-animation.gif

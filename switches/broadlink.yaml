@@ -1,0 +1,9 @@
+# Uncomment when home
+# - platform: broadlink
+#   host: !secret broadlink_ip
+#   mac: !secret broadlink_mac
+#   switches:
+#     tv:
+#        friendly_name: "TV"
+#        command_on: "JgCQAAABKpMTERM3EhITNxISEzYTNxM2EzcSNxI3ExITERMREzcSNxM3EjcSNxMSEzYTERMSExETEhMRExITNhMREzcSNxM2EwAE4wABKZMTEhM2ExITNhISEzcTNhM3EjcSNxI4EhITERMSEzYTNxI3EjcTNxISEzYTEhMREzcSEhMSExETNhMSEzYTNxMREwANBQAAAAAAAAAA"
+#        command_off: "JgCQAAABKpMTERM3EhITNxISEzYTNxM2EzcSNxI3ExITERMREzcSNxM3EjcSNxMSEzYTERMSExETEhMRExITNhMREzcSNxM2EwAE4wABKZMTEhM2ExITNhISEzcTNhM3EjcSNxI4EhITERMSEzYTNxI3EjcTNxISEzYTEhMREzcSEhMSExETNhMSEzYTNxMREwANBQAAAAAAAAAA"
