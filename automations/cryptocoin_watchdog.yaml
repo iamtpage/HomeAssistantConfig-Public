@@ -2,16 +2,19 @@
   initial_state: 'off'
   trigger:
     platform: template
-    value_template: "{% if (float(states.sensor.btc_wallet.state) > float(4000.00)) %}true{% endif %}"
+    value_template: >
+      {% if states('sensor.btc_wallet') and states('sensor.btc_thresh_val') %}
+        {% if (states.sensor.btc_wallet.state > states.sensor.btc_thresh_val.state) %}
+          true
+        {% endif %}
+      {% endif %}
   condition:
     condition: time
     before: '23:00:00'
     after: '08:00:00'
   action:
-    - service: notify.pushbullet
+    - service: notify.telegram
       data_template:
-        title: "Jarvis"
-        target: "device/phone"
         message: "Your BTC Wallet is currently at {{ states.sensor.btc_wallet.state }} USD"
     - service: automation.turn_off
       entity_id: automation.sell_btc_trigger
@@ -24,16 +27,19 @@
   initial_state: 'off'
   trigger:
     platform: template
-    value_template: "{% if (float(states.sensor.eth_wallet.state) > float(1200.00)) %}true{% endif %}"
+    value_template: >
+      {% if states('sensor.eth_wallet') and states('sensor.eth_thresh_val') %}
+        {% if (states.sensor.eth_wallet.state > states.sensor.eth_thresh_val.state) %}
+          true
+        {% endif %}
+      {% endif %}
   condition:
     condition: time
     before: '23:00:00'
     after: '08:00:00'
   action:
-    - service: notify.pushbullet
+    - service: notify.telegram
       data_template:
-        title: "Jarvis"
-        target: "device/phone"
         message: "Your ETH Wallet is currently at {{ states.sensor.eth_wallet.state }} USD"
     - service: automation.turn_off
       entity_id: automation.sell_eth_trigger
