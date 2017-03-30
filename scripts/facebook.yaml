@@ -1,0 +1,7 @@
+facebook:
+  alias: "Facebook Script"
+  sequence:
+    - service: notify.facebook
+      data_template:
+        target: +8008675309
+        message: '{{ message }}'
