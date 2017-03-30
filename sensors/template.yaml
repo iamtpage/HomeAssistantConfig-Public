@@ -1,59 +1,134 @@
  - platform: template
    sensors:
      alarm_clock_hour:
-        value_template: '{% if states.input_slider.alarm_clock_hour.state != None %}{{ states.input_slider.alarm_clock_hour.state | int }}{% else %}0{% endif%}'
+        friendly_name: "Alarm Clock Hour"
+        value_template: >-
+          {% if states('input_slider.alarm_clock_hour') %}
+            {{ states.input_slider.alarm_clock_hour.state | int }}
+          {% else %}
+            0
+          {% endif%}
         entity_id: input_slider.alarm_clock_hour
      alarm_clock_minute:
-        value_template: '{% if states.input_slider.alarm_clock_minute.state != None %}{{ states.input_slider.alarm_clock_minute.state | int }}{% else %}0{% endif%}'
-        entity_id: input_slider.alarm_clock_minute
+       friendly_name: "Alarm Clock Minute"
+       value_template: >-
+         {% if states('input_slider.alarm_clock_minute') %}
+           {{ states.input_slider.alarm_clock_minute.state | int }}
+         {% else %}
+           0
+         {% endif%}
+       entity_id: input_slider.alarm_clock_minute
      alarm_clock_time:
-        friendly_name: "Alarm Clock Set To:"
-        value_template: >-
-          {%- if states.sensor.alarm_clock_hour.state | int > 12 -%}
-             {{ states.sensor.alarm_clock_hour.state | int - 12 }}:
-           {%- else -%}
-             {{ states.sensor.alarm_clock_hour.state }}:
+       friendly_name: "Alarm Clock Set To:"
+       value_template: >-
+         {% if states('sensor.alarm_clock_hour') %}
+           {%- if states.sensor.alarm_clock_hour.state | int > 12 -%}
+              {{ states.sensor.alarm_clock_hour.state | int - 12 }}:
+            {%- else -%}
+              {{ states.sensor.alarm_clock_hour.state }}:
+            {%- endif -%}
+            {%- if states.sensor.alarm_clock_minute.state | length == 1 -%}
+              0
+            {%- endif -%}
+              {{ states.sensor.alarm_clock_minute.state | string() + " "}}
+            {%- if states.sensor.alarm_clock_hour.state | int > 11 -%}
+                PM
+            {%- else -%}
+                AM
+            {%- endif -%}
+         {%- endif -%}
+     alarm_clock_time_long:
+       value_template: >-
+         {% if states('sensor.alarm_clock_hour') %}
+           {% if states.sensor.alarm_clock_hour.state | length == 1 -%}
+             0
            {%- endif -%}
+             {{ states.sensor.alarm_clock_hour.state }}:
            {%- if states.sensor.alarm_clock_minute.state | length == 1 -%}
              0
            {%- endif -%}
-             {{ states.sensor.alarm_clock_minute.state | string() + " "}}
-           {%- if states.sensor.alarm_clock_hour.state | int > 11 -%}
-               PM
-           {%- else -%}
-               AM
-           {%- endif -%}
-     alarm_clock_time_long:
-       value_template: >-
-         {% if states.sensor.alarm_clock_hour.state | length == 1 -%}
-           0
-         {%- endif -%}
-           {{ states.sensor.alarm_clock_hour.state }}:
-         {%- if states.sensor.alarm_clock_minute.state | length == 1 -%}
-           0
-         {%- endif -%}
-           {{ states.sensor.alarm_clock_minute.state }}
+             {{ states.sensor.alarm_clock_minute.state }}
+         {% endif %}
      btc_wallet:
-        value_template: "{% if states.sensor.coinbase_btc_buy_price is not none %} {{ (float(states.sensor.coinbase_btc_buy_price.state) * float(10.5000)) | round(2) }} {% else %}float(0.0){% endif %}"
-        friendly_name: "BTC Wallet"
-        unit_of_measurement: USD
-        entity_id: sensor.coinbase_btc_buy_price
+       friendly_name: "BTC Wallet"
+       unit_of_measurement: USD
+       entity_id: sensor.coinbase_btc_sell_price
+       value_template: >
+         {% if states('sensor.coinbase_btc_sell_price') %}
+           {{ (float(states.sensor.coinbase_btc_sell_price.state) * float(states.input_slider.btc_amount.state)) | round(2) }}
+         {% else %}
+           {{ float(0.0) }}
+         {% endif %}
      eth_wallet:
-        value_template: "{% if states.sensor.coinbase_eth_buy_price is not none %} {{ (float(states.sensor.coinbase_eth_buy_price.state) * float(10.5000)) | round(2) }} {% else %}float(0.0){% endif %}"
-        friendly_name: "ETH Wallet"
-        unit_of_measurement: USD
-        entity_id: sensor.coinbase_eth_buy_price
+       friendly_name: "ETH Wallet"
+       unit_of_measurement: USD
+       entity_id: sensor.coinbase_eth_sell_price
+       value_template: >
+         {% if states('sensor.coinbase_eth_sell_price') %}
+           {{ (float(states.sensor.coinbase_eth_sell_price.state) * float(states.input_slider.eth_amount.state)) | round(2) }}
+         {% else %}
+           {{ float(0.0) }}
+         {% endif %}
      phone_battery:
-        unit_of_measurement: '%'
-        friendly_name: "Phone Battery"
-        value_template: >
-          {%- if states.device_tracker.phone_gps.attributes.battery %}
-              {{ states.device_tracker.phone_gps.attributes.battery }}
-          {% else %}
-              {{ states.sensor.phone_battery.state }}
-          {%- endif %}
-        icon_template: "{%- if states.device_tracker.phone_gps.attributes.battery < 5 %}mdi:battery-outline{%- elif states.device_tracker.phone_gps.attributes.battery > 95 %}mdi:battery{% else %}mdi:battery-{{(states.device_tracker.phone_gps.attributes.battery|float / 10)|round*10}}{%- endif %}"
+       unit_of_measurement: '%'
+       friendly_name: "Phone Battery"
+       entity_id: device_tracker.phone_gps
+       value_template: >
+         {%- if states('device_tracker.phone_gps') %}
+             {{ states.device_tracker.phone_gps.attributes["battery"] }}
+         {%- endif %}
+       icon_template: >
+         {%- if states.device_tracker.phone_gps.attributes["battery"] %}
+           {%- if states.device_tracker.phone_gps.attributes["battery"] < 5 %}
+             mdi:battery-outline
+           {%- elif states.device_tracker.phone_gps.attributes["battery"] > 95 %}
+             mdi:battery
+           {% else %}
+             mdi:battery-{{(states.device_tracker.phone_gps.attributes["battery"]|float / 10)|round*10}}
+           {%- endif %}
+         {% else %}
+           mdi:battery-minus
+         {% endif %}
      steam_game:
-        value_template: "{% if states.sensor.steam_aaaaaaaaaaaaaaa != None %} {{     states.sensor.steam_aaaaaaaaaaaaaaaaaaaaaa.attributes.Game }} {% else %}null{% endif %}"
-        friendly_name: "Steam Game"
-        entity_id: sensor.steam_aaaaaaaaaaaaaaaa      
+       friendly_name: "Steam Game"
+       entity_id: sensor.steam_76561198019873207
+       value_template: >
+         {% if states('sensor.steam_76561198019873207') %} 
+           {{ states.sensor.steam_76561198019873207.attributes.Game }} 
+         {% endif %}
+     btc_slider_val:
+       friendly_name: "BTC Amount"
+       entity_id: input_slider.btc_amount
+       value_template: >
+         {% if states('input_slider.btc_amount') %}
+           {{ states.input_slider.btc_amount.state }}
+         {% else %}
+           0
+         {% endif %}
+     eth_slider_val:
+       friendly_name: "ETH Amount"
+       entity_id: input_slider.eth_amount
+       value_template: >
+         {% if states('input_slider.eth_amount') %}
+           {{ states.input_slider.eth_amount.state }}
+         {% else %}
+           0
+         {% endif %}       
+     btc_thresh_val:
+       friendly_name: "BTC Threshold"
+       entity_id: input_slider.btc_thresh
+       value_template: >
+         {% if states('input_slider.btc_thresh') %}
+           {{ states.input_slider.btc_thresh.state }}
+         {% else %}
+           999
+         {% endif %}
+     eth_thresh_val:
+       friendly_name: "ETH Threshold"
+       entity_id: input_slider.eth_thresh
+       value_template: >
+         {% if states('input_slider.eth_thresh') %}
+           {{ states.input_slider.eth_thresh.state }}
+         {% else %}
+           999
+         {% endif %}
