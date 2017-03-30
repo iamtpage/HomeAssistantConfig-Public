@@ -5,8 +5,6 @@
       - button.button1
       - button.button2
   action:
-    service: notify.pushbullet
+    service: notify.telegram
     data_template:
-      title: "Jarvis"
-      target: "device/phone"
       message: " {{ trigger.to_state.attributes.friendly_name }} was pushed!"
