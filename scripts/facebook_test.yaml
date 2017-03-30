@@ -1,0 +1,14 @@
+test_fb_notification:
+  sequence:
+    - service: notify.facebook
+      data:
+        message: Test choice
+        target: +8008675309
+        data:
+          quick_replies:
+            - content_type: text
+              title: Red
+              payload: red_choice
+            - content_type: location
+              title: Blue
+              payload: blue_choice
