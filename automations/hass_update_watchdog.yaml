@@ -3,8 +3,6 @@
     platform: state
     entity_id: updater.updater
   action:
-    service: notify.pushbullet
+    service: notify.telegram
     data_template:
-      target: "device/phone"
-      title: "Jarvis"
       message: "Home Assistant {{ states('updater.updater') }} is available." 
