@@ -3,8 +3,6 @@
     platform: event
     event_type: homeassistant_start
   action:
-    service: notify.pushbullet
+    service: notify.telegram
     data:
-      target: "device/phone"
-      title: "Jarvis"
-      message: "Home Assistant is up"
+      message: "Home Assistant is online"
