@@ -1,5 +1,4 @@
 - alias: "Smartwatch Watchdog"
-  initial_state: 'off'
   trigger:
     platform: state
     entity_id: device_tracker.phone_bt
@@ -14,8 +13,6 @@
     for:
       minutes: 5
   action:
-    service: notify.pushbullet
-    data_template:
-      title: "Jarvis"
-      target: "device/phone"
+    service: notify.telegram
+    data:
       message: "You have left your watch at home"
