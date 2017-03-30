@@ -1,0 +1,6 @@
+telegram:
+  alias: "Telegram Script"
+  sequence:
+    - service: notify.telegram
+      data_template:
+        message: '{{ message }}'
