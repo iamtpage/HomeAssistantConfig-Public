@@ -5,21 +5,15 @@
      - condition: time
        before: "08:00:00"
        after: "07:00:00"
-     - condition: time
-       weekday:
-         - mon
-         - tue
-         - wed
-         - thu
-         - fri
+     - condition: state
+       entity_id: 'binary_sensor.workday_sensor'
+       state: 'on'
   trigger:
     platform: state
     entity_id: device_tracker.phone_bt
     from: "home"
     to: "not_home"
   action:
-    service: notify.pushbullet
+    service: notify.telegram
     data_template:
-      target: "device/phone"
-      title: "Jarvis"
       message: "It will take you {{ states.sensor.work_commute.state }} minutes to get to work"
