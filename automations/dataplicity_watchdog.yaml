@@ -7,17 +7,23 @@
    condition:
      condition: or
      conditions:
-       - condition: state
-         entity_id: sensor.dataplicity
-         state: 'off'
-       - condition: state
-         entity_id: sysctl.supervisor_service
-         state: 'failed'
+       - condition: template
+         value_template: >
+           {% if states('sensor.dataplicity') %}
+             {% if is_state('sensor.dataplicity', 'off') %}
+               true
+             {% endif %}
+           {% endif %}
+       - condition: template
+         value_template: >
+           {% if states('sensor.supervisor_service') %}
+             {% if is_state('sensor.supervisor_service', 'failed') %}
+               true
+             {% endif %}
+           {% endif %}
    action:
-     - service: notify.pushbullet
+     - service: notify.telegram
        data:
-         title: "Jarvis"
-         target: "device/phone"
          message: "Dataplicity tunnel is broken"
      - service: shell_command.restart_dataplicity
      - service: automation.turn_off
