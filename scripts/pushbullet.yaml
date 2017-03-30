@@ -1,0 +1,8 @@
+pushbullet:
+  alias: "Pushbullet Script"
+  sequence:
+    - service: notify.pushbullet
+      data_template:
+        target: 'device/phone'
+        title: 'Jarvis'
+        message: '{{ message }}'
