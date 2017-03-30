@@ -10,8 +10,6 @@
       entity_id: sensor.disk_use_percent
       above: 80
   action:
-    - service: notify.pushbullet
+    - service: notify.telegram
       data_template:
-        title: "Jarvis"
         message: "Warning! {{trigger.to_state.attributes.friendly_name}} is {{ trigger.to_state.state }}"
-        target: "device/phone"
