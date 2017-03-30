@@ -1,0 +1,13 @@
+- alias: "Precipitation Notification"
+  trigger:
+    platform: template
+    value_template: >
+      {% if  is_state('sensor.dark_sky_precip', 'unknown') %}
+        false
+      {% else %}
+        true
+      {% endif %}
+  action:
+    service: notify.telegram
+    data_template:
+      message: " {{ trigger.to_state.state }} has been detected in your area"
