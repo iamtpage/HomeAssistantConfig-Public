@@ -1,19 +1,18 @@
 - alias: "Alarm Clock"
   trigger:
     platform: template
-    value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time_long.state }}'
+    value_template: >
+      {% if states('sensor.time') and states('sensor.alarm_clock_time_long') %}
+        {{ states.sensor.time.state == states.sensor.alarm_clock_time_long.state }}
+      {% endif %}
   condition:
     condition: and
     conditions:
       - condition: and
         conditions:
-        - condition: time
-          weekday:
-          - mon
-          - tue
-          - wed
-          - thu
-          - fri
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'on'
         - condition: state
           entity_id: group.me
           state: "home"
@@ -27,7 +26,7 @@
     - service: script.voice_notify
       data_template:
         value1: >
-          "It's currently {{states.sensor.dark_sky_summary.state}} and feels like {{states.sensor.dark_sky_apparent_temperature.state|round}} degrees in North Carolina.
+          "It's currently {{states.sensor.dark_sky_summary.state}} and feels like {{states.sensor.dark_sky_apparent_temperature.state|round}} degrees in Cary.
           Today will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}, with a high of {{states.sensor.dark_sky_daily_high_temperature.state|round}} degrees.
           {% if now().strftime("%H")|int < 8 and now().strftime("%w")|int > 0 and now().strftime("%w")|int < 6 %}
             The current drive to work is {{states.sensor.work_commute.attributes.duration}}.
