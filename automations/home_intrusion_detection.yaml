@@ -1,5 +1,4 @@
 - alias: "Home Intrusion Detection"
-  initial_state: 'off'
   trigger:
     platform: state
     entity_id:
@@ -19,8 +18,6 @@
     for:
       minutes: 10
   action:
-    service: notify.pushbullet
+    service: notify.telegram
     data_template:
-      title: "Jarvis"
-      target: "device/phone"
       message: "WARNING: {{ trigger.to_state.attributes.friendly_name }} has been turned {{ trigger.to_state.state }}"
