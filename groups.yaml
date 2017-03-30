@@ -32,6 +32,8 @@ backend:
     - group.nic_eth0
     - group.nic_wlan0
     - group.alarm_clock
+    - group.bitcoin_backend
+    - group.ethereum_backend
 
 alarm_clock:
   name: Alarm Clock
@@ -77,7 +79,7 @@ ai:
     - automation.home_intrusion_detection
     - automation.master_toggle
     - automation.overseer
-    - automation.rain_notification
+    - automation.precipitation_notification
     - automation.sell_btc_trigger
     - automation.sell_eth_trigger
     - automation.smartwatch_watchdog
@@ -105,12 +107,28 @@ bitcoin:
     - sensor.coinbase_btc_buy_price
     - sensor.coinbase_btc_sell_price
 
+bitcoin_backend:
+  name: Bitcoin
+  entities:
+    - sensor.btc_slider_val
+    - sensor.btc_thresh_val
+    - input_slider.btc_amount
+    - input_slider.btc_thresh
+
 ethereum:
   name: Ethereum
   entities:
     - sensor.eth_wallet
     - sensor.coinbase_eth_buy_price
     - sensor.coinbase_eth_sell_price
+
+ethereum_backend:
+  name: Ethereum
+  entities:
+    - sensor.eth_slider_val
+    - sensor.eth_thresh_val
+    - input_slider.eth_amount
+    - input_slider.eth_thresh
 
 me:
   name: "Presence"
@@ -162,7 +180,7 @@ sites:
 steam:
   name: "Steam Spy"
   entities:
-    - sensor.steam_11111111111111111
+    - sensor.steam_111111111111111111111
     - sensor.steam_game
 
 sysinfo:
@@ -183,7 +201,7 @@ tracking:
     - weblink.odin_unraid
     - sensor.tv_template
     - sensor.laptop_template
-    - sensor.gf_laptop_template
+    - sensor.lauren_laptop_template
     - sensor.watch_bt_template
     - sensor.ir2ip_template
     - sensor.desktop_template
