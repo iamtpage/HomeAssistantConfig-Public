@@ -4,8 +4,6 @@
     entity_id: sensor.ups_battery
     below: 95
   action:
-    service: notify.pushbullet
+    service: notify.telegram
     data:
-      title: "Jarvis"
-      target: "device/phone"
       message: "Warning! UPS is running on battery power!"
