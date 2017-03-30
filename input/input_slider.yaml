@@ -12,4 +12,30 @@ alarm_clock_minute:
   step: 5
   name: Alarm Clock Minute
 
+btc_amount:
+  initial: 0.999
+  min: 0
+  max: 1
+  step: 0.001
+  name: BTC Amount
 
+eth_amount:
+  initial: 5.000
+  min: 0
+  max: 10
+  step: 0.001
+  name: ETH Amount
+
+btc_thresh:
+  initial: 50
+  min: 50
+  max: 100
+  step: 5
+  name: BTC Threshold
+
+eth_thresh:
+  initial: 230
+  min: 220
+  max: 300
+  step: 5
+  name: ETH Threshold
