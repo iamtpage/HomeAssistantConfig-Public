@@ -40,6 +40,16 @@ input_boolean: !include input/input_boolean.yaml
 updater:
   reporting: no
 
+# Only include domains that I want the state restored on
+recorder:
+  purge_days: 3
+  include:
+    domains:
+      - weblink
+      - input_slider
+      - input_boolean
+      - input_select
+
 logger:
   default: warn
 
@@ -47,10 +57,31 @@ logger:
 #emulated_hue:
 #  expose_by_default: false
 
+binary_sensor:
+  - platform: workday
+    country: US
+
 notify:
   - platform: pushbullet
     name: pushbullet
     api_key: !secret pushbullet_api_key
+  - platform: telegram
+    name: telegram
+    api_key: !secret telegram_api_key
+    chat_id: !secret telegram_chat_id
+  - platform: facebook
+    name: facebook
+    page_access_token: !secret facebook_page_access_token
+    
+panel_iframe:
+  pihole:
+    title: "Pi-hole"
+    url: "http://thor.vik/admin/index.php"
+    icon: mdi:dns
+  habridge:
+    title: "HA Bridge"
+    url: "http://loki.vik"
+    icon: mdi:bridge
 
 weblink:
   entities:
@@ -88,6 +119,13 @@ http:
   use_x_forwarded_for: True
   ip_ban_enabled: True
   login_attempts_threshold: 3
+
+telegram_webhooks:
+  api_key: !secret telegram_api_key
+  trusted_networks:
+    - 1.1.1.1/32
+  user_id:
+    user1: !secret telegram_chat_id
 
 google:
   client_id: !secret google_client_id
