@@ -1,0 +1,9 @@
+- alias: "ZWAVE Battery Monitor"
+  initial_state: 'off'
+  trigger:
+    - platform: template
+      value_template: "{{ states.zwave.ecolink_motion_detector_2.attributes.battery_level < 20 }}"
+  action:
+    - service: notify.telegram
+      data_template:
+        message: "Warning! You should replace the {{trigger.to_state.attributes.friendly_name}} battery"
