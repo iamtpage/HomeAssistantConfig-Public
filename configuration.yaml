@@ -6,9 +6,7 @@ homeassistant:
   elevation: !secret elevation_home
 
   unit_system: imperial
-  # Uncomment when home
-  #time_zone: America/Chicago
-  time_zone: America/New_York
+  time_zone: America/Chicago
 
   customize: !include_dir_merge_named customize
 
@@ -23,8 +21,6 @@ zeroconf:
 conversation:
 history:
 logbook:
-# Uncomment when home
-#apcupsd:
 
 script: !include_dir_merge_named scripts
 automation: !include_dir_merge_list automations
@@ -36,30 +32,33 @@ camera: !include_dir_merge_list cameras
 shell_command: !include shell_commands/shell_commands.yaml
 input_slider: !include input/input_slider.yaml
 input_boolean: !include input/input_boolean.yaml
+input_select: !include input/input_select.yaml
+rest_command: !include rest_commands/rest_commands.yaml
+
+recorder:
+  purge_days: 3
+
+apcupsd:
+  host: thor.vik
+  port: 3551
 
 updater:
   reporting: no
 
-# Only include domains that I want the state restored on
-recorder:
-  purge_days: 3
-  include:
-    domains:
-      - weblink
-      - input_slider
-      - input_boolean
-      - input_select
-
 logger:
   default: warn
-
-# Uncomment when home
-#emulated_hue:
-#  expose_by_default: false
 
 binary_sensor:
   - platform: workday
     country: US
+
+zwave:
+  usb_path: /dev/ttyUSB0
+  config_path: /home/homeassistant/open-zwave/config
+
+zha:
+  usb_path: /dev/ttyUSB1
+  database_path: /home/homeassistant/.homeassistant/zigbee.db
 
 notify:
   - platform: pushbullet
@@ -72,25 +71,23 @@ notify:
   - platform: facebook
     name: facebook
     page_access_token: !secret facebook_page_access_token
-    
-panel_iframe:
-  pihole:
-    title: "Pi-hole"
-    url: "http://thor.vik/admin/index.php"
-    icon: mdi:dns
-  habridge:
-    title: "HA Bridge"
-    url: "http://loki.vik"
-    icon: mdi:bridge
 
 weblink:
   entities:
+    - name: "Grafana"
+      url: 1.1.1.1
+    - name: "Plex"
+      url: 1.1.1.1
     - name: "Router"
-      url: http://192.168.1.1
+      url: 1.1.1.1
     - name: "Odin (unRAID)"
-      url: http://odin.vik
+      url: 1.1.1.1
     - name: "Pi-Hole Admin Page"
-      url: http://thor.vik/admin
+      url: 1.1.1.1
+    - name: "HA Bridge"
+      url: 1.1.1.1
+    - name: "Odin (IPMI)"
+      url: 1.1.1.1
 
 tts:
   - platform: amazon_polly
@@ -104,55 +101,58 @@ media_player:
   - platform: cast
     name: "Google Home"
     host: 1.1.1.1
-# Uncomment when home
-#  - platform: roku
-#    name: "Roku TV"
-#    host: 1.1.1.1
-#  -  platform: plex
-#     name: "Plex Server"
-#     host: !secret odin_host
 
 http:
   api_password: !secret http_password
+  base_url: !secret http_base_url
   server_port: 8123
   server_host: !secret server_host_ip
   use_x_forwarded_for: True
   ip_ban_enabled: True
   login_attempts_threshold: 3
 
-telegram_webhooks:
+telegram_bot:
+  platform: webhooks
   api_key: !secret telegram_api_key
   trusted_networks:
-    - 1.1.1.1/32
-  user_id:
-    user1: !secret telegram_chat_id
+    - 1.1.1.1
+    - 149.154.167.197/32
+    - 149.154.167.198/31
+    - 149.154.167.200/29
+    - 149.154.167.208/28
+    - 149.154.167.224/29
+    - 149.154.167.232/31
+  allowed_chat_ids:
+    - !secret telegram_chat_id
 
 google:
   client_id: !secret google_client_id
   client_secret: !secret google_client_secret
 
-# Uncomment when home
-#light:
-#  - platform: hue
-#    host: !secret hue_ip
-#    allow_unreachable: true
-#    name: "Hue Lights"
-#
-#influxdb:
-#  host: !secret odin_host
-#  whitelist:
-#     - sensor.broadlink_sensor_temperature
-#     - sensor.cpu_use
-#     - sensor.dark_sky_daily_high_temperature
-#     - sensor.dary_sky_daily_low_temperature
-#     - sensor.dark_sky_nearest_storm_distance
-#     - sensor.dark_sky_precip_intensity
-#     - sensor.dark_sky_precip_probability
-#     - sensor.dark_sky_temperature
-#     - sensor.pihole
-#     - sensor.pihole_domains_blocked
-#     - sensor.pihole_percentage_today
-#     - sensor.pihole_queries
-#     - sensor.ram_use
-#     - sensor.ups_battery
-#     - sensor.ups_load
+light:
+  - platform: hue
+    host: !secret hue_ip
+    allow_unreachable: true
+    name: "Hue Lights"
+
+influxdb:
+  host: !secret odin_host
+  username: homeassistant
+  password: homeassistant
+  database: home_assistant
+  include:
+    entities:
+       - sensor.broadlink_sensor_temperature
+       - sensor.cpu_use
+       - sensor.dark_sky_daily_high_temperature
+       - sensor.dary_sky_daily_low_temperature
+       - sensor.dark_sky_nearest_storm_distance
+       - sensor.dark_sky_precip_intensity
+       - sensor.dark_sky_precip_probability
+       - sensor.dark_sky_temperature
+       - sensor.pihole_ads_blocked_today
+       - sensor.pihole_percentage_blocked_today
+       - sensor.pihole_dns_queries_today
+       - sensor.ram_use
+       - sensor.ups_battery
+       - sensor.ups_load
