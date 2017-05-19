@@ -10,7 +10,3 @@
   - platform: generic
     name: "aaaa Weather"
     still_image_url: https://icons.wxug.com/data/weather-maps/radar/united-states/lawton-oklahoma-region-current-radar-animation.gif
-
-  - platform: generic
-    name: "aaaa Weather"
-    still_image_url: https://icons.wxug.com/data/weather-maps/radar/united-states/charlotte-north-carolina-region-current-radar-animation.gif
