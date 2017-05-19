@@ -1,7 +1,8 @@
 - alias: "HASS Startup Watchdog"
+  initial_state: 'on'
   trigger:
-    platform: event
-    event_type: homeassistant_start
+    platform: homeassistant
+    event: start
   action:
     service: notify.telegram
     data:
