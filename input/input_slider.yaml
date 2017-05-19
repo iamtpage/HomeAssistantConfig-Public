@@ -39,3 +39,17 @@ eth_thresh:
   max: 300
   step: 5
   name: ETH Threshold
+
+ltc_amount:
+  initial: 2
+  min: 0
+  max: 10
+  step: 0.001
+  name: LTC Amount
+
+ltc_thresh:
+  initial: 90
+  min: 50
+  max: 100
+  step: 5
+  name: LTC Threshold
