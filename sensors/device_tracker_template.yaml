@@ -80,12 +80,42 @@
       friendly_name: "vpn.tpage.io"
       icon_template: "{% if is_state('device_tracker.vpn', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
 
+    tunnel_template:
+      value_template: "{% if is_state('device_tracker.tunnel', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "tunnel.tpage.io"
+      icon_template: "{% if is_state('device_tracker.tunnel', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
     watch_bt_template:
       value_template: "{% if is_state('device_tracker.watch_bt', 'home') %}online{% else %}offline{% endif %}"
-      friendly_name: "Moto 360 Watch (BT)"
+      friendly_name: "Asus ZenWatch 3 (BT)"
       icon_template: "{% if is_state('device_tracker.watch_bt', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
 
     website_template:
       value_template: "{% if is_state('device_tracker.website', 'home') %}online{% else %}offline{% endif %}"
       friendly_name: "www.tpage.io"
       icon_template: "{% if is_state('device_tracker.website', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    thor_template:
+      value_template: "{% if is_state('device_tracker.thor', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Thor"
+      icon_template: "{% if is_state('device_tracker.thor', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    balder_template:
+      value_template: "{% if is_state('device_tracker.balder', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Balder"
+      icon_template: "{% if is_state('device_tracker.balder', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    bragi_template:
+      value_template: "{% if is_state('device_tracker.bragi', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "Bragi"
+      icon_template: "{% if is_state('device_tracker.bragi', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    homeassistant_remote_template:
+      value_template: "{% if is_state('device_tracker.homeassistant_remote', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "homeassistant.tpage.io"
+      icon_template: "{% if is_state('device_tracker.homeassistant_remote', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+    plex_remote_template:
+      value_template: "{% if is_state('device_tracker.plex_remote', 'home') %}online{% else %}offline{% endif %}"
+      friendly_name: "plex.tpage.io"
+      icon_template: "{% if is_state('device_tracker.plex_remote', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
