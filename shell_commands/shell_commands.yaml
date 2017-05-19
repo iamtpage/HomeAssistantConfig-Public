@@ -1,4 +1,4 @@
 restart_pi: sudo /bin/systemctl reboot
 restart_hass: sudo /bin/systemctl restart home-assistant.service
-sleep_desktop: wakeonlan FD:05:6B:6A:CC:4C
+sleep_desktop: wakeonlan AA:AA:AA:AA:AA:AA
 git_pull: cd /home/homeassistant/.homeassistant; git pull origin master
