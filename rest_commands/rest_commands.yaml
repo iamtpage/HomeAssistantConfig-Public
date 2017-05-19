@@ -1,0 +1,23 @@
+  turn_off_rule_dim:
+     url: !secret hue_rule_dim
+     method: put
+     payload: '{"status":"disabled"}'
+
+  turn_off_rule_off:
+     url: !secret hue_rule_off
+     method: put
+     payload: '{"status":"disabled"}'
+
+  turn_on_rule_dim:
+     url: !secret hue_rule_dim
+     method: put
+     payload: '{"status":"enabled"}'
+
+  turn_on_rule_off:
+     url: !secret hue_rule_off
+     method: put
+     payload: '{"status":"enabled"}'
+
+  launch_plex:
+     url: !secret plex_url
+     method: post
