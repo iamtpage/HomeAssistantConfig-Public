@@ -4,3 +4,9 @@
   - device_id: calendar
     name: Calendar
     track: true
+
+- cal_id: asdasd@group.calendar.google.com
+  entities:
+  - device_id: work
+    name: Work
+    track: true
