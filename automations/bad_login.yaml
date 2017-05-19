@@ -1,0 +1,9 @@
+- alias: "Bad Login"
+  initial_state: 'on'
+  trigger:
+    platform: template
+    value_template: "{{ states('persistent_notification.httplogin') != 'unknown' }}"
+  action:
+    service: notify.telegram
+    data_template:
+      message: "{{ states.persistent_notification.httplogin.state }}"
