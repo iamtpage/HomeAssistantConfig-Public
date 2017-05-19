@@ -11,7 +11,7 @@
         state: 'on'
   trigger:
     platform: state
-    entity_id: device_tracker.phone_bt
+    entity_id: group.me
     to: "home"
   action:
     service: homeassistant.turn_on
