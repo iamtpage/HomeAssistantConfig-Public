@@ -1,0 +1,21 @@
+- alias: "Alarm Clock Adjuster"
+  initial_state: 'off'
+  trigger:
+    platform: time
+    hours: '/6'
+    minutes: '00'
+    seconds: '00'
+  condition:
+    condition: state
+    entity_id: input_boolean.auto_set_alarm
+    state: 'on'
+  action:
+    - service: input_slider.select_value
+      entity_id: input_slider.alarm_clock_hour
+      data_template:
+        value: >
+          {%- if is_state("binary_sensor.workday_sensor", "off") -%}
+            9.0
+          {%- else -%}
+            7.0
+          {%- endif -%}
