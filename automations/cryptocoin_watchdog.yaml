@@ -4,7 +4,7 @@
     platform: template
     value_template: >
       {% if states('sensor.btc_wallet') and states('sensor.btc_thresh_val') %}
-        {% if (states.sensor.btc_wallet.state > states.sensor.btc_thresh_val.state) %}
+        {% if (states.sensor.btc_wallet.state| float) > (states.sensor.btc_thresh_val.state| float) %}
           true
         {% endif %}
       {% endif %}
@@ -29,7 +29,7 @@
     platform: template
     value_template: >
       {% if states('sensor.eth_wallet') and states('sensor.eth_thresh_val') %}
-        {% if (states.sensor.eth_wallet.state > states.sensor.eth_thresh_val.state) %}
+        {% if (states.sensor.eth_wallet.state| float) > (states.sensor.eth_thresh_val.state| float) %}
           true
         {% endif %}
       {% endif %}
@@ -47,3 +47,28 @@
         minutes: 10
     - service: automation.turn_on
       entity_id: automation.sell_eth_trigger
+
+- alias: "Sell LTC Trigger"
+  initial_state: 'off'
+  trigger:
+    platform: template
+    value_template: >
+      {% if states('sensor.ltc_wallet') and states('sensor.ltc_thresh_val') %}
+        {% if (states.sensor.ltc_wallet.state| float) > (states.sensor.ltc_thresh_val.state| float) %}
+          true
+        {% endif %}
+      {% endif %}
+  condition:
+    condition: time
+    before: '23:00:00'
+    after: '08:00:00'
+  action:
+    - service: notify.telegram
+      data_template:
+        message: "Your LTC Wallet is currently at {{ states.sensor.ltc_wallet.state }} USD"
+    - service: automation.turn_off
+      entity_id: automation.sell_ltc_trigger
+    - delay:
+        minutes: 10
+    - service: automation.turn_on
+      entity_id: automation.sell_ltc_trigger
