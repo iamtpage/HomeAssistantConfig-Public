@@ -37,3 +37,20 @@
      User-Agent: Home Assistant
      Content-Type: application/json
      CB-VERSION: 2017-01-03
+
+ - platform: rest
+   name: "Bathroom Temperature"
+   resource: !secret hue_temp_url
+   unit_of_measurement: '°F'
+   value_template: '{{ ( ( ( value_json.state.temperature | round(-1) / 100 ) * 9 / 5) + 32) | float | round(1) }}'
+
+ - platform: rest
+   name: "Bathroom Motion Sensor"
+   resource: !secret hue_motion_url
+   value_template: '{{ value_json.state.presence }}'
+
+ - platform: rest
+   name: "Bathroom Light Level"
+   resource: !secret hue_lightlevel_url
+   unit_of_measurement: 'Lux'
+   value_template: '{{ ( value_json.state.lightlevel | round(-1) ) / 100 }}'
