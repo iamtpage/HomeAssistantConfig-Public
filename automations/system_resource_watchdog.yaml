@@ -1,4 +1,5 @@
 - alias: "System Resource Watchdog"
+  initial_state: 'on'
   trigger:
     - platform: numeric_state
       entity_id: sensor.cpu_use
