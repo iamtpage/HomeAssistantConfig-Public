@@ -2,3 +2,5 @@
    mac_address: !secret desktop_mac
    name: "Desktop WOL"
    host: 1.1.1.1
+   turn_off:
+     service: shell_command.sleep_desktop
