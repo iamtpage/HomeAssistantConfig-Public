@@ -2,12 +2,17 @@ default_view:
   view: yes
   entities:
     - group.sites
+    - group.fitbit
     - group.bitcoin
     - group.ethereum
+    - group.litecoin
     - group.me
+    - group.me_backend
     - group.pihole
     - group.steam
     - group.tracking
+    - group.web_links
+    - group.dash
     - updater.updater
     - persistent_notification.invalid_config
     - configurator.plex_media_server
@@ -16,24 +21,38 @@ weather_view:
   view: yes
   name: Weather
   entities:
-    - group.weather
+    - group.home_weather
+    - group.work_weather
     - camera.us_weather
-    - camera.denton_weather
-    - camera.cary_weather
+    - camera.asdf_weather
 
 backend:
   view: yes
   name: Backend
   entities:
-    - group.ai
-    - group.scripts
-    - group.sysinfo
+    - group.tyr_sysinfo
+    - group.thor_sysinfo
     - group.apcups
     - group.nic_eth0
-    - group.nic_wlan0
+    - group.sysinfo
+    - group.apcups
     - group.alarm_clock
+    - input_select.log_level
+
+cryptocurrency:
+  name: Crypto Currency
+  view: yes
+  entities:
     - group.bitcoin_backend
     - group.ethereum_backend
+    - group.litecoin_backend
+
+automation:
+  name: Automation
+  view: yes
+  entities:
+    - group.ai
+    - group.scripts
 
 alarm_clock:
   name: Alarm Clock
@@ -42,54 +61,66 @@ alarm_clock:
     - input_slider.alarm_clock_hour
     - input_slider.alarm_clock_minute
     - input_boolean.alarm_clock_status
+    - input_boolean.auto_set_alarm
 
-# Uncomment when home
-#lights:
-#  view: yes
-#  name: Lights
-#  entities:
-#    - group.bathroom
-#    - group.bedroom
+lights:
+  view: yes
+  name: Lights
+  entities:
+    - group.bathroom
+    - group.bedroom
+    - group.hue_motion_sensor
 
-#bathroom:
-#  name: "Bathroom Lights"
-#  entities:
-#    - light.bathroom_light_left
-#    - light.bathroom_light_middle
-#    - light.bathroom_light_right
+bathroom:
+  name: "Bathroom Lights"
+  entities:
+    - light.bathroom_light_left
+    - light.bathroom_light_middle
+    - light.bathroom_light_right
 
-#bedroom:
-#  name: "Bedroom Lights"
-#  entities:
-#    - light.bedroom_fan_light
-#    - light.bedroom_lamp_light
+bedroom:
+  name: "Bedroom Lights"
+  entities:
+    - light.bedroom_fan_light
+    - light.bedroom_lamp_light
 
 ai:
   name: AI Knowledge
+  control: hidden
   entities:
     - automation.alarm_clock
+    - automation.alarm_clock_adjuster
+    - automation.bad_login
     - automation.bedtime
     - automation.button_push
     - automation.commute_to_work
-    - automation.dataplicity_watchdog
     - automation.device_status
     - automation.hass_startup_watchdog
     - automation.hass_update_watchdog
-    - automation.hass_weekly_restart
+    - automation.heal_zwave_nightly
     - automation.home_intrusion_detection
-    - automation.master_toggle
+    - automation.light_watchdog
+    - automation.log_level
     - automation.overseer
     - automation.precipitation_notification
     - automation.sell_btc_trigger
     - automation.sell_eth_trigger
-    - automation.smartwatch_watchdog
+    - automation.sell_ltc_trigger
     - automation.system_resource_watchdog
+    - automation.telegram_location
+    - automation.telegram_ping_pong
+    - automation.telegram_restart
+    - automation.telegram_start
+    - automation.telegram_weather
     - automation.traffic_watchdog
     - automation.turn_lights_off_when_not_home
-    - automation.turn_lights_on_when_home
+    - automation.turn_lights__when_home_motion
+    - automation.turn_lights__when_home_presence
     - automation.ups_battery_watchdog
     - automation.wake_computer_when_home
     - automation.website_watchdog
+    - automation.welcome_asdf
+    - automation.zwave_battery_monitor
 
 apcups:
   name: APC UPS Monitor
@@ -130,14 +161,63 @@ ethereum_backend:
     - input_slider.eth_amount
     - input_slider.eth_thresh
 
+litecoin:
+  name: Litecoin
+  entities:
+    - sensor.ltc_wallet
+    - sensor.coinbase_ltc_buy_price
+    - sensor.coinbase_ltc_sell_price
+
+litecoin_backend:
+  name: Litecoin
+  entities:
+    - sensor.ltc_slider_val
+    - sensor.ltc_thresh_val
+    - input_slider.ltc_amount
+    - input_slider.ltc_thresh
+
+dash:
+  name: "Driving Stats (Dash)"
+  entities:
+    - sensor.dash_driver_score
+    - sensor.dash_current_vehicle_odometer
+    - sensor.dash_last_trip_distance_driven
+    - sensor.dash_last_trip_average_speed
+    - sensor.dash_last_trip_time
+
+fitbit:
+  name: "Fitbit Health Information (Tyler)"
+  entities:
+    - sensor.body_weight
+    - sensor.body_fat_template
+    - sensor.bmi_template
+
+hue_motion_sensor:
+  name: "Hue Motion Sensor (Bathroom)"
+  entities:
+    - sensor.bathroom_light_level
+    - sensor.bathroom_motion_sensor
+    - sensor.bathroom_temperature
+
 me:
   name: "Presence"
   entities:
     - device_tracker.phone
     - device_tracker.phone_bt
+
+asdf:
+  name: "asdf"
+  entities:
+    - device_tracker.asdf_iphone
+    - device_tracker.asdf_iphone_bt
+
+me_backend:
+  name: "Location Details"
+  entities:
     - device_tracker.phone_gps
     - sensor.phone_battery
-    - device_tracker.lauren_iphone
+    - device_tracker.asdf_iphone
+    - device_tracker.asdf_iphone_bt
     - camera.my_location
 
 nic_eth0:
@@ -147,44 +227,43 @@ nic_eth0:
     - sensor.sent_eth0
     - sensor.received_eth0
 
-nic_wlan0:
-  name: "wlan0 Stats"
-  entities:
-    - sensor.ipv4_address_wlan0
-    - sensor.sent_wlan0
-    - sensor.received_wlan0
-
 pihole:
   name: "Pi-Hole"
   entities:
-    - weblink.pihole_admin_page
     - sensor.pihole_ads_blocked_today
     - sensor.pihole_ads_percentage_blocked_today
     - sensor.pihole_dns_queries_today
 
 scripts:
   name: Scripts
+  control: hidden
   entities:
     - script.bedroom_lights_off
     - script.bedroom_lights_on
     - script.dim_lights
-    - script.start_of_day
+    - script.facebook
+    - script.pushbullet
+    - script.shower_time
+    - script.telegram
     - script.voice_notify
+    - script.git_update
 
 sites:
   name: "Websites"
   entities:
     - sensor.website_template
+    - sensor.homeassistant_remote_template
+    - sensor.plex_remote_template
     - sensor.vpn_template
 
 steam:
   name: "Steam Spy"
   entities:
-    - sensor.steam_111111111111111111111
+    - sensor.steam_asdf
     - sensor.steam_game
 
-sysinfo:
-  name: "System Information"
+tyr_sysinfo:
+  name: "Tyr System Information"
   entities:
     - sensor.cpu_use
     - sensor.average_load_5m
@@ -194,11 +273,17 @@ sysinfo:
     - sensor.since_last_boot
     - backup.lastrun
 
+thor_sysinfo:
+  name: "Thor System Information"
+  entities:
+    - sensor.thor_cpu_load
+    - sensor.thor_disk_use_2
+    - sensor.thor_ram_use
+
 tracking:
   name: What's connected
+  control: hidden
   entities:
-    - weblink.router
-    - weblink.odin_unraid
     - sensor.tv_template
     - sensor.laptop_template
     - sensor.lauren_laptop_template
@@ -208,6 +293,9 @@ tracking:
     - sensor.huehub_template
     - sensor.odin_template
     - sensor.odin2_template
+    - sensor.thor_template
+    - sensor.balder_template
+    - sensor.bragi_template
     - sensor.alexa_template
     - sensor.alexa_bt_template
     - sensor.google_home_template
@@ -215,17 +303,42 @@ tracking:
     - switch.desktop_wol
     - switch.tv
 
-weather:
-  name: "Weather"
+home_weather:
+  name: "Home Weather"
   entities:
     - sensor.broadlink_sensor_temperature
-    - sensor.dark_sky_minutely_summary
-    - sensor.dark_sky_hourly_summary
-    - sensor.dark_sky_temperature
-    - sensor.dark_sky_apparent_temperature
-    - sensor.dark_sky_nearest_storm_distance
-    - sensor.dark_sky_precip
-    - sensor.dark_sky_precip_intensity
-    - sensor.dark_sky_precip_probability
-    - sensor.dark_sky_daily_high_temperature
-    - sensor.dark_sky_daily_low_temperature
+    - sensor.home_weather_minutely_summary
+    - sensor.home_weather_hourly_summary
+    - sensor.home_weather_temperature
+    - sensor.home_weather_apparent_temperature
+    - sensor.home_weather_nearest_storm_distance
+    - sensor.home_weather_precip
+    - sensor.home_weather_precip_intensity
+    - sensor.home_weather_precip_probability
+    - sensor.home_weather_daily_high_temperature
+    - sensor.home_weather_daily_low_temperature
+
+work_weather:
+  name: "Work Weather"
+  entities:
+    - sensor.work_weather_minutely_summary
+    - sensor.work_weather_hourly_summary
+    - sensor.work_weather_temperature
+    - sensor.work_weather_apparent_temperature
+    - sensor.work_weather_nearest_storm_distance
+    - sensor.work_weather_precip
+    - sensor.work_weather_precip_intensity
+    - sensor.work_weather_precip_probability
+    - sensor.work_weather_daily_high_temperature
+    - sensor.work_weather_daily_low_temperature
+
+web_links:
+  name: "Links"
+  entities:
+    - weblink.router
+    - weblink.odin_unraid
+    - weblink.pihole_admin_page
+    - weblink.grafana
+    - weblink.plex
+    - weblink.ha_bridge
+    - weblink.odin_ipmi
