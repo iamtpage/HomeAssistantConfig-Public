@@ -1,3 +1,7 @@
 alarm_clock_status:
   initial: on
   name: Alarm Clock Toggle
+
+auto_set_alarm:
+  initial: on
+  name: Auto Adjust Alarm Clock
