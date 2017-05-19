@@ -132,3 +132,33 @@
          {% else %}
            999
          {% endif %}
+     ltc_thresh_val:
+       friendly_name: "LTC Threshold"
+       entity_id: input_slider.ltc_thresh
+       value_template: >
+         {% if states.input_slider.ltc_thresh %}
+           {{ states.input_slider.ltc_thresh.state }}
+         {% else %}
+           999
+         {% endif %}
+     body_fat_template:
+       friendly_name: "Body Fat"
+       entity_id: sensor.body_fat
+       unit_of_measurement: "%"
+       value_template: >
+         {{ states.sensor.body_fat.state | round(2) }}
+     bmi_template:
+       friendly_name: "BMI"
+       entity_id: sensor.bmi
+       unit_of_measurement: "BMI"
+       value_template: >
+         {{ states.sensor.bmi.state | round(2) }}
+     ltc_slider_val:
+       friendly_name: "LTC Amount"
+       entity_id: input_slider.ltc_amount
+       value_template: >
+         {% if states.input_slider.ltc_amount %}
+           {{ states.input_slider.ltc_amount.state }}
+         {% else %}
+           0
+         {% endif %}
