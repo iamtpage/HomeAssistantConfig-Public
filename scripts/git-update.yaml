@@ -1,0 +1,5 @@
+git_update:
+  alias: "Git Update and Restart"
+  sequence:
+    - service: shell_command.git_pull
+    - service: shell_command.restart_hass
