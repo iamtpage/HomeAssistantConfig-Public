@@ -2,17 +2,17 @@
   initial_state: 'off'
   trigger:
     platform: template
-    value_template: "{% if as_timestamp(now()) == ((as_timestamp(states.calendar.calendar.attributes.start_time) -000-states.sensor.work_commute.state|float *60)|timestamp_custom('%')) %}true{% else %}false{% endif %}"
+    value_template: "{% if as_timestamp(now()) >= ((as_timestamp(states.calendar.work.attributes.start_time) -states.sensor.work_commute.state|float *60)|timestamp_custom('%')) %}true{% else %}false{% endif %}"
   condition:
     condition: and
     conditions:
       - condition: state
-        entity_id: device_tracker.phone_bt
+        entity_id: group.me
         state: 'home'
       - condition: and
         conditions:
         - condition: time
-          before: '08:00:00'
+          before: '09:00:00'
           after: '07:00:00'
         - condition: state
           entity_id: 'binary_sensor.workday_sensor'
