@@ -1,0 +1,8 @@
+shower_time:
+  alias: "Shower Time"
+  sequence:
+    - service: rest_command.turn_off_rule_dim
+    - service: rest_command.turn_off_rule_off
+    - delay: '00:15:00'
+    - service: rest_command.turn_on_rule_dim
+    - service: rest_command.turn_on_rule_off
