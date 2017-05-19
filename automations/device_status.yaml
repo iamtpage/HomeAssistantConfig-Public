@@ -3,10 +3,20 @@
   trigger:
     platform: state
     entity_id:
-      - device_tracker.huehub
-      - device_tracker.ir2ip
-      - device_tracker.odin
-      - device_tracker.router
+      - sensor.ir2ip_template
+      - sensor.huehub_template
+      - sensor.odin_template
+      - sensor.odin2_template
+      - sensor.thor_template
+      - sensor.balder_template
+      - sensor.bragi_template
+      - sensor.alexa_template
+      - sensor.google_home_template
+      - sensor.vpn_template
+      - sensor.website_template
+      - sensor.homeassistant_remote_template
+      - sensor.plex_remote_template
+      - sensor.router_template
   action:
     service: notify.telegram
     data_template:
