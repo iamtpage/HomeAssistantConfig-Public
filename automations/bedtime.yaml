@@ -1,7 +1,8 @@
 - alias: "Bedtime"
+  initial_state: 'on'
   trigger:
     - platform: time
-      after: "00:00:01"
+      after: "00:01:00"
   condition:
     condition: and
     conditions:    
@@ -12,6 +13,10 @@
         entity_id: group.bedroom
         state: "on"
   action:
+    - service: script.voice_notify
+      data_template:
+        value1: >
+          "You should be going to bed soon, its getting late."
     - service: light.turn_on
       entity_id: light.bedroom_fan_light
       data:
