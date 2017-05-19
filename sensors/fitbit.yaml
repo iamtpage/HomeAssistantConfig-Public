@@ -1,0 +1,5 @@
+ - platform: fitbit
+   monitored_resources:
+     - "body/weight"
+     - "body/bmi"
+     - "body/fat"
