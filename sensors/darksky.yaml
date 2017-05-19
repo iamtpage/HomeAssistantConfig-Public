@@ -1,6 +1,30 @@
  - platform: darksky
+   name: Home Weather
    api_key: !secret darksky_api
-   update_interval: "00:02:00"
+   latitude: !secret latitude_home
+   longitude: !secret longitude_home
+   update_interval: "00:03:00"
+   monitored_conditions:
+      - summary
+      - icon
+      - nearest_storm_distance
+      - precip_type
+      - precip_probability
+      - precip_intensity
+      - apparent_temperature
+      - temperature
+      - minutely_summary
+      - hourly_summary
+      - daily_summary
+      - temperature_max
+      - temperature_min
+
+ - platform: darksky
+   name: Work Weather
+   api_key: !secret darksky_api
+   latitude: !secret latitude_work
+   longitude: !secret longitude_home
+   update_interval: "00:03:00"
    monitored_conditions:
       - summary
       - icon
