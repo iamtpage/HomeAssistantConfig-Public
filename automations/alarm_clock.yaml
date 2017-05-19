@@ -1,4 +1,5 @@
 - alias: "Alarm Clock"
+  initial_state: 'on'
   trigger:
     platform: template
     value_template: >
@@ -8,34 +9,35 @@
   condition:
     condition: and
     conditions:
-      - condition: and
-        conditions:
-        - condition: state
-          entity_id: binary_sensor.workday_sensor
-          state: 'on'
-        - condition: state
-          entity_id: group.me
-          state: "home"
+      - condition: state
+        entity_id: group.me
+        state: "home"
       - condition: state
         entity_id: input_boolean.alarm_clock_status
         state: 'on'
   action:
-#    - service: script.bedroom_lights_on
+    - service: script.bedroom_lights_on
+    - service: media_player.volume_set
+      entity_id: media_player.bedroom_home
+      data:
+        volume_level: 0.60
+    - service: media_player.play_media
+      data_template:
+        entity_id: media_player.bedroom_home
+        media_content_id: "http://tyr.vik/local/alarm.mp3"
+        media_content_type: "MUSIC"
     - delay:
-        minutes: 1
+        seconds: 13
     - service: script.voice_notify
       data_template:
         value1: >
-          "It's currently {{states.sensor.dark_sky_summary.state}} and feels like {{states.sensor.dark_sky_apparent_temperature.state|round}} degrees in Cary.
-          Today will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}, with a high of {{states.sensor.dark_sky_daily_high_temperature.state|round}} degrees.
-          {% if now().strftime("%H")|int < 8 and now().strftime("%w")|int > 0 and now().strftime("%w")|int < 6 %}
+          "It's currently {{states.sensor.home_weather_summary.state}} and feels like {{states.sensor.home_weather_apparent_temperature.state|round}} degrees in .
+          Today will be {{states.sensor.home_weather_hourly_summary.state|replace(".", "")}}, with a high of {{states.sensor.home_weather_daily_high_temperature.state|round}} degrees.
+          {% if is_state("binary_sensor.workday_sensor", "on") -%}
+            In it's currently {{states.sensor.work_weather_summary.state}} and feels like {{states.sensor.work_weather_apparent_temperature.state|round}} degrees, 
+            it's going to be {{states.sensor.work_weather_hourly_summary.state|replace(".", "")}}, with a high of {{states.sensor.work_weather_daily_high_temperature.state|round}} degrees.
             The current drive to work is {{states.sensor.work_commute.attributes.duration}}.
           {% endif %}
-          {% if states.sensor.dark_sky_apparent_temperature.state|round < 40 %}
+          {% if states.sensor.home_weather_apparent_temperature.state|round < 50 %}
             I would recommend wearing a jacket, it is chilly outside.
-          {% endif %}
-          {% if states.sensor.dark_sky_daily_max_precip_intensity is not none %}
-            {% if states.sensor.dark_sky_daily_max_precip_intensity.state > 0 %}
-              And it is probably going to rain today, so please bring an umbrella.
-            {% endif %}
           {% endif %}"
