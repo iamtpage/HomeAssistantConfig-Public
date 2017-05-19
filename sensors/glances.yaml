@@ -1,0 +1,7 @@
+ - platform: glances
+   host: thor.vik
+   name: Thor
+   resources:
+     - 'disk_use_percent'
+     - 'memory_use_percent'
+     - 'processor_load'
