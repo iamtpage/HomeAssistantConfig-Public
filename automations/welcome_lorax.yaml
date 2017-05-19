@@ -1,0 +1,12 @@
+- alias: "Welcome Lorax"
+  initial_state: 'on'
+  trigger:
+    platform: state
+    entity_id: group.lorax
+    from: "not_home"
+    to: "home"
+  action:
+    - service: script.voice_notify
+      data_template:
+        value1: >
+          "Welcome home Lorax, I missed you!"
