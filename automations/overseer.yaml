@@ -1,8 +1,8 @@
  - alias: "Overseer"
- #  initial_state: 'off'
+   initial_state: 'on'
    trigger:
-     platform: event
-     event_type: homeassistant_start
+     platform: homeassistant
+     event: start
    action:
      - delay:
          minutes: 2
@@ -13,9 +13,13 @@
      - service: automation.turn_on
        entity_id: automation.sell_eth_trigger
      - service: automation.turn_on
-       entity_id: automation.dataplicity_watchdog
+       entity_id: automation.sell_ltc_trigger
      - service: automation.turn_on
        entity_id: automation.wake_computer_when_home
      - service: automation.turn_on
        entity_id: automation.traffic_watchdog
+     - service: automation.turn_on
+       entity_id: automation.alarm_clock_adjuster
+     - service: automation.turn_on
+       entity_id: automation.zwave_battery_monitor
      - service: sensor.update_fastdotcom
