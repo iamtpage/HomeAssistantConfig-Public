@@ -1,4 +1,5 @@
 - alias: 'telegram ping pong'
+  initial_state: 'on'
   trigger:
     platform: event
     event_type: telegram_command
@@ -10,6 +11,7 @@
       message: 'pong'
 
 - alias: 'telegram restart'
+  initial_state: 'on'
   trigger:
     platform: event
     event_type: telegram_command
@@ -21,22 +23,8 @@
         message: 'Restarting HA...'
     - service: shell_command.restart_hass
 
-- alias: 'telegram fixtunnel'
-  trigger:
-    platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/fixtunnel'
-  action:
-    - service: notify.telegram
-      data:
-        message: 'Fixing Dataplicity tunnel...'
-    - service: shell_command.restart_dataplicty
-    - service: notify.telegram
-      data:
-        message: 'Reset Dataplicity tunnel'
-
 - alias: 'telegram location'
+  initial_state: 'on'
   trigger:
     platform: event
     event_type: telegram_command
@@ -52,6 +40,7 @@
           longitude: '{{ float(states.device_tracker.phone_gps.attributes.longitude) }}'
 
 - alias: 'telegram weather'
+  initial_state: 'on'
   trigger:
     platform: event
     event_type: telegram_command
@@ -61,10 +50,22 @@
     service: notify.telegram
     data_template:
       message: >
-        Today: {{ states.sensor.dark_sky_hourly_summary.state }}
-         This week: {{ states.sensor.dark_sky_daily_summary.state }}
+        Currently: {{ states.sensor.home_weather_minutely_summary.state|replace(".", "") }} in Denton and
+        {% if states.sensor.home_weather_minutely_summary.state|replace(".","") == states.sensor.work_weather_minutely_summary.state|replace(".","") -%}
+         Westlake.
+        {% else -%}
+        {{ states.sensor.work_weather_minutely_summary.state|replace(".", "")|lower }} in Westlake.
+        {% endif %}
+        {{- '\n' -}}
+        24 hours: {{ states.sensor.home_weather_hourly_summary.state|replace(".", "") }} in Denton and
+        {% if states.sensor.home_weather_hourly_summary.state|replace(".","") == states.sensor.work_weather_hourly_summary.state|replace(".","") -%}
+         Westlake.
+        {% else -%}
+        and {{ states.sensor.work_weather_hourly_summary.state|replace(".", "")|lower }} in Westlake.
+        {% endif %}
 
 - alias: 'telegram start'
+  initial_state: 'on'
   trigger:
     platform: event
     event_type: telegram_command
@@ -76,8 +77,5 @@
       message: 'Here is what I can do'
       data:
         keyboard:
-          - '/ping, /location'
-          - '/fixtunnel, /restart'
-    
-
-
+          - '/ping, /location, /weather'
+          - '/restart'
